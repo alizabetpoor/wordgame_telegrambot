@@ -19,11 +19,11 @@ def send_welcome(message):
     markup.add('yes☑️')
     markup.add('cancel🔴')
     msg = bot.reply_to(message, 'do you want to start the game?', reply_markup=markup)
-    bot.register_next_step_handler(msg, process_name_step)
+    bot.register_next_step_handler(msg, process_word_step1)
 
 myword=""
 numberofallwords=1
-def process_name_step(message):
+def process_word_step1(message):
     global chat_id
     global myword
     global numberofallwords
@@ -40,13 +40,13 @@ def process_name_step(message):
         random.shuffle(newword)
         newwords=",".join(newword)
         msg=bot.reply_to(message,f"guess the word : {newwords}\n if you want to exit the game please enter /cancel",reply_markup=hide)
-        bot.register_next_step_handler(msg, process_age_step)
+        bot.register_next_step_handler(msg, process_word_step2)
     elif text == "cancel🔴":
         bot.reply_to(message,"ok try again later!",reply_markup=hide)
     else:
         msg=bot.reply_to(message,"please enter one keyboard⚠️")
-        bot.register_next_step_handler(msg,process_name_step)
-def process_age_step(message):
+        bot.register_next_step_handler(msg,process_word_step1)
+def process_word_step2(message):
     global myword
     text=message.text
     text=text.lower()
@@ -61,7 +61,7 @@ def process_age_step(message):
         bot.reply_to(message,"you exit the game❌")
     else:
         msg=bot.reply_to(message,"your word is wrong,please try again⚠️")
-        bot.register_next_step_handler(msg,process_age_step)
+        bot.register_next_step_handler(msg,process_word_step2)
 def nextstep(message):
     global myword
     global chat_id
@@ -78,7 +78,7 @@ def nextstep(message):
         random.shuffle(newword)
         newwords=",".join(newword)
         msg=bot.reply_to(message,f"guess the word : {newwords}\n if you want to exit the game please enter /cancel",reply_markup=hide)
-        bot.register_next_step_handler(msg, process_age_step)
+        bot.register_next_step_handler(msg, process_word_step2)
     elif text=='no🔴':
         bot.reply_to(message,"ok⚠️",reply_markup=hide)
     else:
