@@ -3,7 +3,11 @@ from telebot import types
 import databaseword
 import random
 
+#set your bot token
 API_TOKEN = '1190660423:AAGZXBmCMdmKmvi0T6dyWR8WSi_lH_88jbM'
+
+#set your id to manage the bot
+admin_id=344254169
 
 bot = telebot.TeleBot(API_TOKEN)
 print("bot is ready to use")
@@ -101,10 +105,10 @@ def nextstep(message):
 #admin command
 @bot.message_handler(commands=["admin"])
 def admin_panel(message):
+    global admin_id
     try:
         chat_id = message.chat.id
-        myid=344254169
-        if chat_id==myid:
+        if chat_id==admin_id:
             markup = types.ReplyKeyboardMarkup(one_time_keyboard=True,row_width=2)
             markup.add('add word','delete word','show all words')
             msg=bot.reply_to(message,"you have access",reply_markup=markup)
