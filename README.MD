@@ -11,3 +11,4 @@ python main.py
 ```
 ## description
 API_TOKEN = 'your bot token'
+admin_id= your id for manage the bot
